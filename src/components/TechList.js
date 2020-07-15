@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-
 class TechList extends Component {
     state = {
         newTech: '',
@@ -19,11 +18,11 @@ class TechList extends Component {
     handleSubmit = e => {
         e.preventDefault();
 
-        if(this.state.newTech.length === 0) {
+        if (this.state.newTech.length === 0) {
             this.setState({
                 exist: true,
             })
-           return console.log("Você não adicionou nenhum campo")
+            return console.log("Você não adicionou nenhum campo")
         }
         this.setState({
             techs: [...this.state.techs, this.state.newTech],
@@ -34,15 +33,22 @@ class TechList extends Component {
         console.log(this.state.newTech);
     }
 
+    handleDelete = (tech) => {
+        this.setState({ techs: this.state.techs.filter(t => t !== tech) })
+    }
+
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
                 <ul>
                     {this.state.techs.map(tech => (
-                        <li key={tech}>{tech}</li>
+                        <li key={tech}>
+                            {tech}
+                            <button onClick={() => this.handleDelete(tech)} type='button'>Remover</button>
+                        </li>
                     ))}
                 </ul>
-                    { this.state.exist ?  (<p>Os campos não podem ser nulos.</p>) : null }
+                {this.state.exist ? (<p>Os campos não podem ser nulos.</p>) : null}
                 <input type="text" onChange={this.handleInputChange} value={this.state.newTech} />
                 <button type="submit">Enviar</button>
             </form>
