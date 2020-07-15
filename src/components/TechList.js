@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
 
+import TechItem from './TechItem';
+import Profile from './Profile';
+import Image from '../assets/profile.jpg';
+
+import './techList.css';
+
 class TechList extends Component {
     state = {
         newTech: '',
@@ -8,7 +14,10 @@ class TechList extends Component {
             'ReactJS',
             'React Native'
         ],
-        exist: false
+        exist: false,
+        profiles: [
+            { username: "Jonathan Leão Matos", image: `${Image}` }
+        ],
     };
 
     handleInputChange = e => {
@@ -24,6 +33,7 @@ class TechList extends Component {
             })
             return console.log("Você não adicionou nenhum campo")
         }
+
         this.setState({
             techs: [...this.state.techs, this.state.newTech],
             newTech: '',
@@ -39,19 +49,25 @@ class TechList extends Component {
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
-                <ul>
-                    {this.state.techs.map(tech => (
-                        <li key={tech}>
-                            {tech}
-                            <button onClick={() => this.handleDelete(tech)} type='button'>Remover</button>
-                        </li>
-                    ))}
-                </ul>
-                {this.state.exist ? (<p>Os campos não podem ser nulos.</p>) : null}
-                <input type="text" onChange={this.handleInputChange} value={this.state.newTech} />
-                <button type="submit">Enviar</button>
-            </form>
+            <>
+                <header className="header">
+                    <h1>Profile View</h1>
+                    {this.state.profiles.map(profile =>
+                        <Profile key={profile} profile={profile} />)}
+                </header>
+
+                <form onSubmit={this.handleSubmit}>
+                    <h1>Stack</h1>
+                    <ul>
+                        {this.state.techs.map(tech => <TechItem key={tech.id} tech={tech} onDelete={() => this.handleDelete(tech)} />)}
+                    </ul>
+
+                    {this.state.exist ? (<p>Os campos não podem ser nulos.</p>) : null}
+
+                    <input type="text" onChange={this.handleInputChange} value={this.state.newTech} />
+                    <button type="submit">Enviar</button>
+                </form>
+            </>
         );
     }
 }
