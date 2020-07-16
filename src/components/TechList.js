@@ -7,6 +7,10 @@ import Image from '../assets/profile.jpg';
 import './techList.css';
 
 class TechList extends Component {
+    // static defaultProps = {
+    //     tech: 'Oculto'
+    // };
+
     state = {
         newTech: '',
         techs: [
@@ -27,12 +31,12 @@ class TechList extends Component {
     handleSubmit = e => {
         e.preventDefault();
 
-        if (this.state.newTech.length === 0) {
-            this.setState({
-                exist: true,
-            })
-            return console.log("Você não adicionou nenhum campo")
-        }
+        // if (this.state.newTech.length === 0) {
+        //     this.setState({
+        //         exist: true,
+        //     })
+        //     return console.log("Você não adicionou nenhum campo")
+        // }
 
         this.setState({
             techs: [...this.state.techs, this.state.newTech],
@@ -64,8 +68,8 @@ class TechList extends Component {
                     <ul>
                         {this.state.techs.map(tech => <TechItem key={tech.id} tech={tech} onDelete={() => this.handleDelete(tech)} />)}
                     </ul>
-
-                    {this.state.exist ? (<p>Os campos não podem ser nulos.</p>) : null}
+                    <TechItem />
+                    {/* {this.state.exist ? (<p>Os campos não podem ser nulos.</p>) : null} */}
 
                     <input type="text" onChange={this.handleInputChange} value={this.state.newTech} />
                     <button type="submit">Enviar</button>
