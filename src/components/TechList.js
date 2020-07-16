@@ -16,7 +16,7 @@ class TechList extends Component {
         ],
         exist: false,
         profiles: [
-            { username: "Jonathan Leão Matos", image: `${Image}` }
+            { username: "Jonathan Leão Matos", work: 'Desenvolvedor', image: `${Image}` }
         ],
     };
 
@@ -43,6 +43,10 @@ class TechList extends Component {
         console.log(this.state.newTech);
     }
 
+    handleDeletePerfil = (profile) => {
+        this.setState({ profiles: this.state.profiles.filter(p => p !== profile) })
+    }
+
     handleDelete = (tech) => {
         this.setState({ techs: this.state.techs.filter(t => t !== tech) })
     }
@@ -52,8 +56,7 @@ class TechList extends Component {
             <>
                 <header className="header">
                     <h1>Profile View</h1>
-                    {this.state.profiles.map(profile =>
-                        <Profile key={profile} profile={profile} />)}
+                    {this.state.profiles.map(profile => <Profile key={profile} profile={profile} onDelete={() => this.handleDeletePerfil(profile)} />)}
                 </header>
 
                 <form onSubmit={this.handleSubmit}>

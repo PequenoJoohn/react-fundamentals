@@ -1,13 +1,15 @@
 .profile {
-    max-width: 300px;
-    height:300px;
-}
-.profile h1 {
-    font-size: 30px;
+    list-style: none;
 }
 
 .profile h4 {
-    height: 25px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.profile p {
+    font-size: 16px;
+    text-align: center;
 }
 
 .profile img {
